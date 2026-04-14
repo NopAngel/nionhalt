@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# Simple configure script for nionhalt
+
+echo "CONFIGURE"
+echo "checking for C compiler..."
+if command -v gcc >/dev/null 2>&1; then
+    CC="gcc"
+elif command -v clang >/dev/null 2>&1; then
+    CC="clang"
+else
+    echo "Error: no C compiler found (gcc or clang)."
+    exit 1
+fi
+
+echo "compiler found: $CC ..."
+
+echo "generating Makefile..."
+cat << EOF > Makefile
+CC = $CC
+CFLAGS = -O3 -Wall
+TARGET = nionhalt
+
+all:
+	\$(CC) \$(CFLAGS) halt.c -o \$(TARGET)
+
+clean:
+	rm -f \$(TARGET)
+
+install:
+	cp \$(TARGET) /usr/local/bin/
+	chmod u+s /usr/local/bin/\$(TARGET)
+	touch /var/log/nionhalt.log
+	chmod 666 /var/log/nionhalt.log
+
+uninstall:
+	rm -f /usr/local/bin/\$(TARGET)
+EOF
+
+echo "Done. You can now run 'make' to build nionhalt."
