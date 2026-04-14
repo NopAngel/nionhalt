@@ -92,20 +92,21 @@ int main
 
 
     int simulate = (getuid() != 0);
-    if (simulate) printf("Notice: Simulation mode (non-root user).\n");
+    if (simulate) printf("Notice: Simulation mode  (non-root user).\n");
 
     InitSystem init = detect_init();
     char *action = argv[1];
 
     if (init == INIT_OPENRC) 
     {
-        if (strcmp(action, "shutdown") == 0) execute_action("openrc-shutdown --poweroff now", simulate, "shutdown");
+        if (strcmp(action, "shutdown") == 0) execute_action("openrc-shutdown --poweroff now",  simulate, "shutdown");
         else if (strcmp(action, "reboot") == 0) execute_action("openrc-shutdown --reboot now", simulate, "reboot");
+        else if (strcmp(action, "halt") == 0) execute_action("openrc-shutdown --halt now",     simulate, "halt");
     } 
     else if (init == INIT_RUNIT) 
     {
-        if (strcmp(action, "shutdown") == 0) execute_action("runit-init 0", simulate, "shutdown");
-        else if (strcmp(action, "reboot") == 0) execute_action("runit-init 6", simulate, "reboot");
+        if (strcmp(action, "shutdown") == 0) execute_action("runit-init 0",                    simulate, "shutdown");
+        else if (strcmp(action, "reboot") == 0) execute_action("runit-init 6",                 simulate, "reboot");
     } 
     else 
     {
