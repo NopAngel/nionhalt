@@ -1,12 +1,12 @@
 #
-# configure: install Makefile
+#  configure: install Makefile
 #
-# @Copyright (C) 2026: MIT NopAngel
+#
+#   @Copyright (C) 2026: MIT NopAngel
 #      
-#
 
 
-echo "configure: started! ...\n"
+echo "configure: started!! ...\n"
 echo "checking for C compiler..."
 
 
@@ -19,13 +19,13 @@ elif command -v clang >/dev/null 2>&1; then
     CC="clang"
 
 else
-    echo "Error: no C compiler found (gcc or clang)."
+    echo "err: no C compiler found (gcc or clang)."
     exit 1
 fi
 
-echo "compiler found: $CC ..." # compiler found success!
+echo "compiler found: $CC ..." # compiler found success!!
 
-echo "generating Makefile..."
+echo "generating Makefile ..."
 
 # Makefile:
 cat << EOF > Makefile
