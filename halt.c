@@ -14,15 +14,14 @@
 #include <time.h>
 #include <pwd.h>
 
+
 /* LOG PATH */
 #define LOG_FILE "/var/log/nionhalt.log"
 
 
 typedef enum {
     INIT_UNKNOWN,
-
     INIT_OPENRC,
-
     INIT_RUNIT
 } InitSystem;
 
@@ -92,7 +91,7 @@ int main
 
 
     int simulate = (getuid() != 0);
-    if (simulate) printf("Notice: Simulation mode  (non-root user).\n");
+    if (simulate) printf("notice: simulation mode  (non-root user).\n");
 
     InitSystem init = detect_init();
     char *action = argv[1];
